@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ShopContext } from "../context/Shop/ShopContext";
 import { toast } from "react-toastify";
+import api from "../api/apiConfig";
+
 
 const Placeorder = () => {
   const [method, setMethod] = useState("cod");
@@ -44,7 +46,7 @@ const Placeorder = () => {
       handler: async (response) => {
         console.log(response);
         try {
-          const { data } = await axios.post(
+          const { data } = await api.post(
             backendUrl + "/api/order/verifyrazorpay",
             response,
             { headers: { token } }
@@ -98,8 +100,8 @@ const Placeorder = () => {
       /* adding switch cases to check the mode of payment */
       switch (method) {
         case "cod":
-          const response = await axios.post(
-            backendUrl + "/api/order/place",
+          const response = await api.post(
+         "/api/order/place",
             orderdata,
             { headers: { token } }
           );
@@ -113,8 +115,8 @@ const Placeorder = () => {
           break;
 
         case "stripe":
-          const responseStripe = await axios.post(
-            backendUrl + "/api/order/stripe",
+          const responseStripe = await api.post(
+             "/api/order/stripe",
             orderdata,
             { headers: { token } }
           );
@@ -127,8 +129,8 @@ const Placeorder = () => {
           break;
 
         case "razorpay":
-          const responseRazorpay = await axios.post(
-            backendUrl + "/api/order/razorpay",
+          const responseRazorpay = await api.post(
+           "/api/order/razorpay",
             orderdata,
             { headers: { token } }
           );

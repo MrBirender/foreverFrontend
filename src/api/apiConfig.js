@@ -1,5 +1,20 @@
-// src/api.js
+import axios from "axios";
 
-const API_BASE_URL = 'http://localhost:4000';
+export const ENV = "local"; // 'local' | 'test' | 'production'
 
-export default API_BASE_URL;
+const baseUrls = {
+  local: "http://localhost:4000",
+};
+
+export const baseUrl = baseUrls[ENV];
+
+// Create axios instance
+const api = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+//   withCredentials: true,
+});
+
+export default api;

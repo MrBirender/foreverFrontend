@@ -3,16 +3,16 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import API_BASE_URL from "../../api/apiConfig.js";
+import api from "../../api/apiConfig";
 
-export const ShopContext = createContext();
+export const  ShopContext = createContext();
 
 const ShopContextProvider = ({ children }) => {
   1;
   const currency = "₹";
   const deliveryFee = 10;
   const [token, setToken] = useState("");
-  const backendUrl = API_BASE_URL;
+  // const backendUrl = API_BASE_URL;
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
@@ -22,7 +22,7 @@ const ShopContextProvider = ({ children }) => {
   /* getting data from beckend: */
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(backendUrl + "/api/product/list");
+      const response = await api.get("/api/product/list");
       if (response.data.success) {
         setProducts(response.data.products);
 
@@ -70,8 +70,8 @@ const ShopContextProvider = ({ children }) => {
     /* calling api and cart to the database */
     if (token) {
       try {
-        const response = await axios.post(
-          backendUrl + "/api/cart/add",
+        const response = await api.post(
+          "/api/cart/add",
           { itemId, size },
           { headers: { token } }
         );
@@ -121,8 +121,8 @@ const ShopContextProvider = ({ children }) => {
 
     if (token) {
       try {
-        const response = await axios.put(
-          backendUrl + "/api/cart/update",
+        const response = await api.put(
+          "/api/cart/update",
           { itemId, size, quantity },
           { headers: { token } }
         );
@@ -139,11 +139,16 @@ const ShopContextProvider = ({ children }) => {
   // updating cart from the server:
   const getCartData = async (token) => {
     try {
-      const response = await axios.get(backendUrl + "/api/cart/get", {}, {
-        headers: { token },
-      });
+      const response = await api.get(
+        "/api/cart/get",
+        {},
+        {
+          headers: { token },
+        }
+      );
       if (response.data.success) {
         setCartItems(response.data.cartData);
+        
       }
     } catch (error) {
       console.log(error);
@@ -185,7 +190,6 @@ const ShopContextProvider = ({ children }) => {
     updateQuantity,
     getCartTotal,
     navigate,
-    backendUrl,
     token,
     setToken,
   };
