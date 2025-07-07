@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const ENV = "local"; // 'local' | 'test' | 'production'
+export const ENV = "local"; 
 
 const baseUrls = {
   local: "http://localhost:4000",
