@@ -18,6 +18,7 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Search from "./components/Search.jsx";
 import Verify from './pages/Verify.jsx';
+import NotFound from "./pages/NotFound.jsx";
 const App = () => {
   
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/orders" element={<Orders />} />
         <Route path="/place-order" element={<Placeorder />} />
         <Route path="/verify" element={<Verify />}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer/>
     </div>
