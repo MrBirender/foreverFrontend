@@ -46,8 +46,7 @@ const Placeorder = () => {
       handler: async (response) => {
         console.log(response);
         try {
-          const { data } = await api.post(
-            backendUrl + "/api/order/verifyrazorpay",
+          const { data } = await api.post( "/api/order/verifyrazorpay",
             response,
             { headers: { token } }
           );

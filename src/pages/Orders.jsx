@@ -4,6 +4,7 @@ import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
 import { toast } from "react-toastify";
 import axios from "axios";
+import api from "../api/apiConfig";
 const Orders = () => {
   const { currency, token, backendUrl } = useContext(ShopContext);
   const [orders, setOrders] = useState([]);
@@ -14,8 +15,8 @@ const Orders = () => {
       if (!token) {
         return null;
       }
-      const response = await axios.post(
-        backendUrl + "/api/order/userorders",
+      const response = await api.post(
+        "/api/order/userorders",
         {},
         { headers: { token } }
       );
@@ -31,9 +32,7 @@ const Orders = () => {
             item["data"] = order.date;
             orderItems.push(item);
             orderItems.reverse();
-            
           });
-          
         });
         setOrders(orderItems);
         console.log(orders);
@@ -70,21 +69,38 @@ const Orders = () => {
                 key={index}
               />
               <div>
-                <p className="text-xs sm:text-[16px] font-semibold">{product.name}</p>
+                <p className="text-xs sm:text-[16px] font-semibold">
+                  {product.name}
+                </p>
                 <div className="flex flex-col mt-1  gap-2">
                   <div className="flex items-center gap-3 mt-1 text-base  ">
                     <p>
                       {currency}
-                      <span className="font-medium">{` ${product.price}`}.00</span>
+                      <span className="font-medium">
+                        {` ${product.price}`}.00
+                      </span>
                     </p>
-                    <p ><span className="font-medium">Quantity:</span> {product.quantity}</p>
-                    <p><span className="font-medium">Size:</span> {product.size}</p>
+                    <p>
+                      <span className="font-medium">Quantity:</span>{" "}
+                      {product.quantity}
+                    </p>
+                    <p>
+                      <span className="font-medium">Size:</span> {product.size}
+                    </p>
                   </div>
                   <p>
                     Date:{" "}
-                    <span className="ml-2 text-gray-500">{new Date(product.date).toDateString()}</span>
+                    <span className="ml-2 text-gray-500">
+                      {new Date(product.date).toDateString()}
+                    </span>
                   </p>
-                  <p>Payment: <span className="ml-2 text-gray-500"> {product.paymentMethod}</span> </p>
+                  <p>
+                    Payment:{" "}
+                    <span className="ml-2 text-gray-500">
+                      {" "}
+                      {product.paymentMethod}
+                    </span>{" "}
+                  </p>
                 </div>
               </div>
             </div>
@@ -96,7 +112,10 @@ const Orders = () => {
                 <p className="min-w-2.5 h-2.5 border rounded-full bg-green-500"></p>
                 <p className="text-base font-medium">{product.status}</p>
               </div>
-              <button onClick={fetchOrders} className="border text-sm py-2 px-4 font-medium hover:scale-105 hover:bg-black hover:text-white">
+              <button
+                onClick={fetchOrders}
+                className="border text-sm py-2 px-4 font-medium hover:scale-105 hover:bg-black hover:text-white"
+              >
                 Track Order
               </button>
             </div>

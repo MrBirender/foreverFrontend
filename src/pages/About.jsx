@@ -2,10 +2,10 @@ import React from "react";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
 import NewsLetter from "../components/NewsLetter";
-import api from "../api/apiConfig";
+
 
 const About = () => {
-  console.log("api route", api);
+  
   return (
     <div className="border-t pt-8">
       <div className="text-xl sm:text-2xl my-3 text-center">

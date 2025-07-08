@@ -1,9 +1,11 @@
 import axios from "axios";
 
-export const ENV = "local"; 
+// Auto detect environment
+export const ENV = 'production';
 
 const baseUrls = {
-  local: "http://localhost:4000",
+  local: "http://localhost:4000", // Proxy handles it
+  production: "http://ec2-65-0-176-231.ap-south-1.compute.amazonaws.com", // Use real server API
 };
 
 export const baseUrl = baseUrls[ENV];
@@ -14,7 +16,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-//   withCredentials: true,
+  // withCredentials: true,
 });
 
 export default api;
