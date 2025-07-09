@@ -21,4 +21,15 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "✅ Connected to EC2!"
-            # Your real deploy steps will go here next
+
+            echo "🚀 Updating frontend..."
+            cd ~/Desktop/foreverFrontend
+            git pull
+            npm install
+            npm run build
+
+            echo "🔄 Reloading NGINX..."
+            sudo systemctl reload nginx
+            
+            echo "✅ Deploy done!"
+
