@@ -35,7 +35,7 @@ const Navbar = () => {
         </NavLink>
         <NavLink to={"/about"} className="flex flex-col items-center gap-1">
           <p>ABOUT</p>
-          <hr className="bg-gray-700 w-2/4 h-[1.5px] border-none opacity-0 " />
+          <hr className="bg-red-700 w-2/4 h-[1.5px] border-none opacity-0 " />
         </NavLink>
         <NavLink to={"/contact"} className="flex flex-col items-center gap-1">
           <p>CONTACT</p>
